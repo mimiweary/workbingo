@@ -1,7 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     const phrases = [
         "I was not aware of this need.",
-        // Add all your phrases here, ensuring there are enough for the grid.
+        "I still don't understand [INSERT MAJOR COMPONENT]",
+        "A question is asked and completely glossed over",
+        "Cat admiration takes place",
+        "This conversation needs to take place offline",
+        "Correct me if I'm wrong....",
+        "That's a planned feature we're working on implementing",
+        "Someone goes off-cam briefly to hide their reaction/expression",
+        "Screensharing accidentally shows something else not intended",
+        ".Freespace", // This will be our actual Free Space
+        "Unexpected guest appearance in video call",
+        "Mute mishaps",
+        "Technical difficulties",
+        "Back-to-back meetings comment",
+        "Someone says 'Let's circle back'",
+        "Reference to weather or time",
+        "Awkward silence",
+        "Internet connectivity issues",
+        "Use of corporate buzzwords",
+        "Meeting runs over time",
+        "Early dismissal from meeting",
+        "Someone's background noise",
+        "Last-minute agenda changes",
+        "Repeated information"
     ];
 
     // Initialize an empty 5x5 array to track clicked cells.
@@ -24,10 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Add click event listener for each cell.
         cell.addEventListener('click', function() {
-            this.classList.add('clicked');
-            // Mark this cell as clicked in the tracker.
-            clickedCells[Math.floor(counter / 5)][counter % 5] = true;
-            checkBingo(clickedCells);
+            if (!this.classList.contains('clicked')) { // Only act if cell wasn't already clicked.
+                this.classList.add('clicked');
+                // Mark this cell as clicked in the tracker.
+                clickedCells[Math.floor(counter / 5)][counter % 5] = true;
+                if (checkBingo(clickedCells)) {
+                    alert('BINGO!');
+                }
+            }
         });
 
         grid.appendChild(cell);
@@ -46,18 +72,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Check diagonals.
-        if ([0, 1, 2, 3, 4].every(i => clicked[i][i]) || [0, 1, 2, 3, 4].every(i => clicked[i][4 - i])) {
+        if ([0, 1, 2, 3, 4].every(i => clicked[i][i]) || [0, 1, 2, 3, 4].every(i => clicked[4 - i][i])) {
             bingo = true;
         }
 
-        if (bingo) {
-            document.getElementById('bingoMessage').style.display = 'block';
-        }
+        return bingo;
     }
-
-    // Add a div to display the "BINGO" message.
-    const bingoMessage = document.createElement('div');
-    bingoMessage.id = 'bingoMessage';
-    bingoMessage.textContent = 'BINGO!';
-    document.body.appendChild(bingoMessage);
 });
