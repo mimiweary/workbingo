@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "That's a planned feature we're working on implementing",
         "Someone goes off-cam briefly to hide their reaction/expression",
         "Screensharing accidentally shows something else not intended",
-        "....? Freespace?", // This will be our actual Free Space
-        // Add more phrases as needed to fill the grid
+        "Freespace?", // This will be our actual Free Space
         "Unexpected guest appearance in video call",
         "Mute mishaps",
         "Technical difficulties",
