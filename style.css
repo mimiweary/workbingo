@@ -11,8 +11,18 @@
     padding: 20px;
     text-align: center;
     background-color: #f0f0f0;
+    cursor: pointer;
+    user-select: none;
 }
 
-.bingoCell.freeSpace {
-    background-color: #bada55;
+.bingoCell.selected {
+    background-color: purple;
+    color: white;
+}
+
+#bingoMessage {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 24px;
+    display: none;
 }
