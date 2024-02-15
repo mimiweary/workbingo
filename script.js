@@ -26,9 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "Repeated information"
     ];
 
-    // Initialize an empty 5x5 array to track clicked cells.
     const clickedCells = Array(5).fill().map(() => Array(5).fill(false));
-
     const grid = document.getElementById('bingoGrid');
 
     for (let i = 0; i < 25; i++) {
@@ -37,22 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
         if (i === 12) {
             cell.textContent = 'FREE SPACE';
             cell.classList.add('freeSpace');
-            cell.classList.add('clicked'); // Mark the free space as clicked.
-            clickedCells[Math.floor(i / 5)][i % 5] = true; // Mark the free space as clicked in the tracker.
+            cell.classList.add('clicked');
+            clickedCells[Math.floor(i / 5)][i % 5] = true;
         } else {
             let phraseIndex = Math.floor(Math.random() * phrases.length);
             cell.textContent = phrases.splice(phraseIndex, 1);
         }
 
-        // Calculate row and column at the time of cell creation
         const row = Math.floor(i / 5);
         const col = i % 5;
 
-        // Add click event listener for each cell.
         cell.addEventListener('click', function() {
-            if (!this.classList.contains('clicked')) { // Only act if cell wasn't already clicked.
+            if (!this.classList.contains('clicked')) {
                 this.classList.add('clicked');
-                // Mark this cell as clicked in the tracker based on its row and column.
                 clickedCells[row][col] = true;
                 if (checkBingo(clickedCells)) {
                     alert('BINGO!');
@@ -64,17 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function checkBingo(clicked) {
-        // Check rows, columns, and diagonals for Bingo.
         let bingo = false;
 
-        // Check rows and columns.
         for (let i = 0; i < 5; i++) {
             if (clicked[i].every(val => val) || clicked.map(row => row[i]).every(val => val)) {
                 bingo = true;
             }
         }
 
-        // Check diagonals.
         if ([0, 1, 2, 3, 4].every(i => clicked[i][i]) || [0, 1, 2, 3, 4].every(i => clicked[4 - i][i])) {
             bingo = true;
         }
