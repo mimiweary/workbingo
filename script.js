@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         "That's a planned feature we're working on implementing",
         "Someone goes off-cam briefly to hide their reaction/expression",
         "Screensharing accidentally shows something else not intended",
-        ".Freespace", // This will be our actual Free Space
+        "Freespace", // This will be our actual Free Space
         "Unexpected guest appearance in video call",
         "Mute mishaps",
         "Technical difficulties",
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clickedCells = Array(5).fill().map(() => Array(5).fill(false));
 
     const grid = document.getElementById('bingoGrid');
-    let counter = 0; // To iterate through the grid positions
+
     for (let i = 0; i < 25; i++) {
         const cell = document.createElement('div');
         cell.classList.add('bingoCell');
@@ -44,12 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
             cell.textContent = phrases.splice(phraseIndex, 1);
         }
 
+        // Calculate row and column at the time of cell creation
+        const row = Math.floor(i / 5);
+        const col = i % 5;
+
         // Add click event listener for each cell.
         cell.addEventListener('click', function() {
             if (!this.classList.contains('clicked')) { // Only act if cell wasn't already clicked.
                 this.classList.add('clicked');
-                // Mark this cell as clicked in the tracker.
-                clickedCells[Math.floor(counter / 5)][counter % 5] = true;
+                // Mark this cell as clicked in the tracker based on its row and column.
+                clickedCells[row][col] = true;
                 if (checkBingo(clickedCells)) {
                     alert('BINGO!');
                 }
@@ -57,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         grid.appendChild(cell);
-        counter++;
     }
 
     function checkBingo(clicked) {
