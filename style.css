@@ -3,7 +3,7 @@
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
     max-width: 500px;
-    margin: auto;
+    margin: 20px auto;
 }
 
 .bingoCell {
@@ -12,17 +12,17 @@
     text-align: center;
     background-color: #f0f0f0;
     cursor: pointer;
-    user-select: none;
+    transition: background-color 0.3s ease;
 }
 
-.bingoCell.selected {
-    background-color: purple;
-    color: white;
+.bingoCell.clicked {
+    background-color: #800080; /* Purple */
 }
 
 #bingoMessage {
     text-align: center;
-    margin-top: 20px;
-    font-size: 24px;
     display: none;
+    font-size: 2em;
+    font-weight: bold;
+    color: #800080;
 }
